@@ -8,7 +8,7 @@ Stat = namedtuple('Stat', 'cell, value')
 
 # Mappings of json constants to cells in the monk toolbox
 # d3: cell: expressed as percent
-DPS = {'dexterity': ('B2', False), 
+DPS = {'dexterity': ('B2', False),
        'elite-damage': ('B3', True),
        'demon-damage': ('B4', True),
        'attack-speed-incs': ('B5', True),
@@ -49,14 +49,16 @@ EHP = {'armor': ('J28', False),
        'plus-life': ('J31', True)}
 
 # cell = x - y, as defined by the following mapping:
-# d3: x, y, cell 
+# d3: x, y, cell
 SUBTRACTS = {'dps-mh-elem-max': ('dps-mh-max', 'dps-mh-real-max', 'B23'),
              'dps-mh-elem-min': ('dps-mh-min', 'dps-mh-real-min', 'B22'),
              'dps-oh-elem-max': ('dps-oh-max', 'dps-oh-real-max', 'B35'),
              'dps-oh-elem-min': ('dps-oh-min', 'dps-oh-real-min', 'B34')}
 
+
 def get_data(jsondict):
     return jsondict['stats'], jsondict['actives'], jsondict['passives']
+
 
 def get_values(stats):
     data = {}

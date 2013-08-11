@@ -5,7 +5,7 @@ from string import ljust
 # import com libraries
 import win32com.client
 try:
-    if win32com.client.gencache.is_readonly == True:
+    if win32com.client.gencache.is_readonly is True:
         win32com.client.gencache.is_readonly = False
         win32com.client.gencache.Rebuild()
     excel = win32com.client.gencache.EnsureDispatch('Excel.Application')
@@ -39,10 +39,12 @@ def write_data(toolbox, data):
 
     for k, d in data.items():
         if d.cell:
-            print '{}: writing value {} to cell {}'.format(ljust(k, 30), d.value, d.cell)
+            print ('{}: writing value {} to cell {}'
+                   ''.format(ljust(k, 30), d.value, d.cell))
             sheet.Range(d.cell).Value = d.value
         else:
-            print '{}: skipping value {}, no cell'.format(ljust(k, 30), d.value)
+            print ('{}: skipping value {}, no cell'
+                   ''.format(ljust(k, 30), d.value))
     excel.Visible = True
 
 
@@ -54,7 +56,8 @@ def get_sheet(sheet):
 
 def select_excel():
     try:
-        excel_sheets = [f for f in os.listdir(os.getcwd()) if f.endswith('xlsx')]
+        excel_sheets = [f for f in os.listdir(os.getcwd())
+                        if f.endswith('xlsx')]
 
         if len(excel_sheets) == 1:
             return excel_sheets[0]
@@ -63,7 +66,7 @@ def select_excel():
             print "Please select a toolbox sheet:"
             for i, v in enumerate(excel_sheets, 1):
                 print '{}: {}'.format(i, v)
-            
+
             while True:
                 selection = raw_input('>>> ')
                 try:
