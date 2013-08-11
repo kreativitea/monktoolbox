@@ -10,7 +10,7 @@ import requests
 
 from conn import download_data
 from excel import write_data
-from excel import first_excel
+from excel import select_excel
 from calculations import get_data
 from calculations import get_values
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     try:
         tool_file = sys.argv[1]
     except IndexError:
-        tool_file = first_excel()
+        tool_file = select_excel()
 
     tool_path = os.path.join(os.getcwd(), tool_file)
 

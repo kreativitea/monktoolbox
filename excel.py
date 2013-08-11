@@ -15,8 +15,6 @@ except Exception as e:
     raise
 
 
-#TODO: refactor the workbook/worksheet opening process
-#TODO: write a decorator to handle exceptions
 def write_data(toolbox, data):
     ''' Opens the workbook, then the worksheet, then writes the data.'''
     try:
@@ -54,11 +52,27 @@ def get_sheet(sheet):
             return excel.Sheets(s)
 
 
-def first_excel():
+def select_excel():
     try:
-        excel_sheet = [f for f in os.listdir(os.getcwd()) if f.endswith('xlsx')][0]
-        print 'found excel sheet at {}'.format(excel_sheet)
-        return excel_sheet
+        excel_sheets = [f for f in os.listdir(os.getcwd()) if f.endswith('xlsx')]
+
+        if len(excel_sheets) == 1:
+            return excel_sheets[0]
+
+        else:
+            print "Please select a toolbox sheet:"
+            for i, v in enumerate(excel_sheets, 1):
+                print '{}: {}'.format(i, v)
+            
+            while True:
+                selection = raw_input('>>> ')
+                try:
+                    sheet = excel_sheets[int(selection)-1]
+                    print 'attempting to load: {}'.format(sheet)
+                    return sheet
+                except:
+                    print "I'm sorry, that's not a valid selection."
+
     except:
         print "Unable to instantiate workbook!"
         raise IOError("Workbook not found.")
