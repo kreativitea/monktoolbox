@@ -5,8 +5,6 @@
 # import standard libraries
 import os
 import sys
-import json
-import requests
 
 from conn import download_data
 from excel import write_data
